@@ -10,7 +10,7 @@ export interface IUser {
   userStatus?: string
   bio?: string
   profileImage?: string
-  enrolledCourses?: Types.ObjectId[] // students
+  enrolledCourses?: Types.ObjectId[], // students
   createdCourses?: Types.ObjectId[] // teachers
   likedCourses?: Types.ObjectId[]
   followedCourses?: Types.ObjectId[]

@@ -44,6 +44,7 @@ const userSchema = new Schema<IUser>({
       ref: 'Course',
     },
   ],
+
   createdCourses: [
     {
       type: mongoose.Schema.Types.ObjectId,

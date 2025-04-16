@@ -73,10 +73,43 @@ export const followCourseService = async (courseId: string, userId: string) => {
   };
 };
 
+
+export const enrollCourseService = async (courseId: string, userId: string) => {
+  const course = await Course.findById(courseId);
+  if (!course) {
+    throw new Error('Course not found');
+  }
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  if (course.enrolledStudents.includes(user._id)) {
+    throw new Error('Already enrolled in this course');
+  }
+
+  // Add user to course
+  course.enrolledStudents.push(user._id);
+  await course.save();
+
+  // user.enrolledCourses = [];
+  // user.enrolledCourses.push(course._id);
+  // await user.save();
+
+  return {
+    courseId: course._id,
+    userId: user._id,
+  };
+};
+
+
 export const courseService = {
   createCourse,
   getAllCourses,
   likeCourse,
   submitFeedback,
-  followCourseService
+  followCourseService,
+  enrollCourseService
 };

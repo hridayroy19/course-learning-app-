@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
@@ -69,10 +70,36 @@ const submitFeedback = catchAsync(async (req: Request, res: Response) => {
     });
   });
 
+
+// studnet enroll couse 
+ const enrollCourseController = async (req: Request, res: Response) => {
+    try {
+        const { courseId, userId } = req.body;
+  
+      const result = await courseService.enrollCourseService(courseId, userId);
+  
+      res.status(httpStatus.OK).json({
+        success: true,
+        message: 'Enrolled successfully!',
+        data: result,
+      });
+    } catch (err: any) {
+      res.status(httpStatus.BAD_REQUEST).json({
+        success: false,
+        message: err.message,
+      });
+    }
+  };
+
+
+
+
+
 export const courseController = {
     createCourse,
     getAllCourses,
     likeCourse,
     submitFeedback,
-    followCourse
+    followCourse,
+    enrollCourseController
 }
