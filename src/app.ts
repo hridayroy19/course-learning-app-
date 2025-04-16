@@ -7,6 +7,7 @@ import userRouter from './module/user/user.router'
 import { globalErrorHandler } from './middlewares/globalErrorHandler'
 import courserouter from './module/courses/courses.router'
 import lessionrouter from './module/lession/lesson.route'
+import topicRouter from './module/topic/topic.route'
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.use('/api/user', userRouter)
 app.use('/api/auth', authRoute)
 app.use('/api/course', courserouter)
 app.use('/api/lesson', lessionrouter)
+app.use('/api/topic', topicRouter)
 
 
 app.get('/', (req: Request, res: Response) => {
