@@ -6,6 +6,7 @@ import cors from 'cors'
 import userRouter from './module/user/user.router'
 import { globalErrorHandler } from './middlewares/globalErrorHandler'
 import courserouter from './module/courses/courses.router'
+import lessionrouter from './module/lession/lesson.route'
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 app.use('/api/user', userRouter)
 app.use('/api/auth', authRoute)
 app.use('/api/course', courserouter)
+app.use('/api/lesson', lessionrouter)
 
 
 app.get('/', (req: Request, res: Response) => {
