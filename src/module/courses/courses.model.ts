@@ -36,6 +36,7 @@ const courseSchema = new Schema<ICourse>(
       },
     ],
     enrolledStudents: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    followedBy: [{ type: Schema.Types.ObjectId, ref: 'User' }]
   },
   { timestamps: true }
 );

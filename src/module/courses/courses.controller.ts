@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { courseService } from './course.service';
+import { courseService, followCourseService } from './course.service';
 
 
 
@@ -31,25 +31,40 @@ const likeCourse = catchAsync(async (req, res) => {
     const { courseId } = req.params;
     const { studentId } = req.body;
     const result = await courseService.likeCourse(courseId, studentId);
-  
+
     sendResponse(res, {
-      statusCode: httpStatus.OK,
-      message: 'Course liked successfully',
-      data: result
+        statusCode: httpStatus.OK,
+        message: 'Course liked successfully',
+        data: result
     });
-  });
+});
 
 // student feedback course
-  const submitFeedback = catchAsync(async (req: Request, res: Response) => {
+const submitFeedback = catchAsync(async (req: Request, res: Response) => {
     const { courseId } = req.params;
     const { studentId, comment } = req.body;
-  
+
     const result = await courseService.submitFeedback(courseId, studentId, comment);
+
+    sendResponse(res, {
+        status: true,
+        statusCode: httpStatus.OK,
+        message: 'Feedback submitted successfully',
+        data: result,
+    });
+});
+
+
+// follow a course
+ const followCourse = catchAsync(async (req: Request, res: Response) => {
+    const { courseId } = req.params;
+    const { userId } = req.body; // User ID Body থেকে নিতে হবে
+  
+    const result = await followCourseService(courseId, userId);
   
     sendResponse(res, {
-      status: true,
-      statusCode: httpStatus.OK,
-      message: 'Feedback submitted successfully',
+      statusCode: 200,
+      message: 'Course followed successfully',
       data: result,
     });
   });
@@ -58,8 +73,6 @@ export const courseController = {
     createCourse,
     getAllCourses,
     likeCourse,
-    submitFeedback
-
-
-
+    submitFeedback,
+    followCourse
 }

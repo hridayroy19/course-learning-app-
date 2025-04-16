@@ -14,4 +14,5 @@ export interface ICourse {
     comment: string;
   }[];
   enrolledStudents: Types.ObjectId[];
+  followedBy:Types.ObjectId[]
 }

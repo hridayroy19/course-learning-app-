@@ -11,5 +11,5 @@ courserouter.get('/', courseController.getAllCourses);
 
 courserouter.post('/like:courseId', courseController.likeCourse);
 courserouter.post('/feedback/:courseId', courseController.submitFeedback);
-
+courserouter.post('/follow/:courseId', courseController.followCourse);
 export default courserouter;

@@ -13,7 +13,7 @@ export interface IUser {
   enrolledCourses?: Types.ObjectId[] // students
   createdCourses?: Types.ObjectId[] // teachers
   likedCourses?: Types.ObjectId[]
-  followedTeachers?: Types.ObjectId[]
+  followedCourses?: Types.ObjectId[]
   createdAt?: Date
 }
 
