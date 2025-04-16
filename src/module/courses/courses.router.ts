@@ -1,8 +1,13 @@
-import { Router } from "express";
-import coursesController from "./courses.controller";
+import express from 'express';
+import validateRequest from '../../middlewares/validateRequest';
+import { createCourseSchema, } from './course.validation';
+import { courseController } from './courses.controller';
+import auth from '../../middlewares/auth';
 
-const coursesRoute = Router()
+const courserouter = express.Router();
 
-coursesRoute.post("/create", coursesController.createCourse)
+courserouter.post('/create', auth("teacher"), validateRequest(createCourseSchema), courseController.createCourse);
+courserouter.get('/', courseController.getAllCourses);
 
-export default coursesRoute
+
+export default courserouter;

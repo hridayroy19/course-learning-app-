@@ -1,46 +1,16 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-export interface ICourse {
-    title: string;
-    description: string;
-    lessons?: Types.ObjectId[];
-    createdBy: Types.ObjectId;
-    category?: string;
-    level?: string;
-    price?: number;
-    thumbnail?: string;
-}
+const courseSchema = new Schema(
+  {
+    title: { type: String, required: true, trim: true },
+    description: { type: String, required: true },
+    teacherId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    likes: { type: Number, default: 0 },
+    feedback: { type: [String], default: [] },
+    students: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  },
+  { timestamps: true }
+);
 
-const courseSchema = new Schema<ICourse>({
-    title: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    lessons: [
-        {
-            type: Types.ObjectId,
-            ref: 'Lesson',
-        }
-    ],
-    createdBy: {
-        type: Types.ObjectId,
-        ref: 'User',
-        required: true,
-    },
-    category: String,
-    level: String,
-    price: {
-        type: Number,
-        default: 0,
-    },
-    thumbnail: String,
-}, {
-    timestamps: true,
-});
-
-const Course = model<ICourse>('Course', courseSchema);
+const Course = model('Course', courseSchema);
 export default Course;

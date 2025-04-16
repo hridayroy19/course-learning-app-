@@ -1,12 +1,20 @@
-import Course, { ICourse } from "./courses.model";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import Course from "./courses.model";
 
-const createTour = async (payload: ICourse) => {
-    const data = new Course(payload)
-    const result = await data.save()
-    return result
-}
+const createCourse = async (payload: any) => {
+    const result = await Course.create(payload);
+    return result;
+};
+
+const getAllCourses = async () => {
+    const result = await Course.find();
+    return result;
+};
 
 
-export const CourseService = {
-    createTour
+
+export const courseService = {
+    createCourse,
+    getAllCourses,
+
 };
