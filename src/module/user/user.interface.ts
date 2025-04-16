@@ -1,4 +1,5 @@
 import { Types } from 'mongoose'
+import { USER_ROLE } from './user.constants'
 
 export interface IUser {
   _id?: Types.ObjectId
@@ -15,3 +16,6 @@ export interface IUser {
   followedTeachers?: Types.ObjectId[]
   createdAt?: Date
 }
+
+
+export type TUserRole = keyof typeof USER_ROLE;
