@@ -4,6 +4,8 @@ import httpStatus from 'http-status'
 import express, { NextFunction, Request, Response } from 'express'
 import authRoute from './module/auth/auth.route'
 import cors from 'cors'
+import coursesRoute from './module/courses/courses.router'
+import userRouter from './module/user/user.router'
 
 const app = express()
 
@@ -12,7 +14,9 @@ app.use(express.json())
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 
 // router here
+app.use('/api/user', userRouter)
 app.use('/api/auth', authRoute)
+app.use('/api/course', coursesRoute)
 
 
 
