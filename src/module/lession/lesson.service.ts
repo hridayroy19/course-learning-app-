@@ -12,8 +12,20 @@ const getAllLessons = async () => {
 };
 
 
+const updateLesson = async (id: string, payload: any) => {
+    const result = await Lesson.findByIdAndUpdate(id, payload, { new: true });
+    return result;
+};
+
+const deleteLesson = async (id: string) => {
+    const result = await Lesson.findByIdAndDelete(id);
+    return result;
+};
+
 
 export const lessonService = {
     createLesson,
     getAllLessons,
+    updateLesson,
+    deleteLesson
 };

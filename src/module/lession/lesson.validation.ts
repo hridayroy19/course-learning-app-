@@ -7,9 +7,6 @@ export const createLessonSchema = z.object({
 });
 
 export const updateLessonSchema = z.object({
-
     title: z.string().optional(),
     description: z.string().optional(),
-    courseId: z.string().optional()
-
 });

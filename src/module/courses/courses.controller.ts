@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { courseService, followCourseService } from './course.service';
+import { courseService } from './course.service';
 
 
 const createCourse = catchAsync(async (req: Request, res: Response) => {
@@ -58,9 +58,8 @@ const submitFeedback = catchAsync(async (req: Request, res: Response) => {
 // follow a course
 const followCourse = catchAsync(async (req: Request, res: Response) => {
   const { courseId } = req.params;
-  const { userId } = req.body; // User ID Body থেকে নিতে হবে
-
-  const result = await followCourseService(courseId, userId);
+  const { userId } = req.body;
+  const result = await courseService.followCourseService(courseId, userId);
 
   sendResponse(res, {
     statusCode: 200,
@@ -74,7 +73,6 @@ const followCourse = catchAsync(async (req: Request, res: Response) => {
 const enrollCourseController = async (req: Request, res: Response) => {
   try {
     const { courseId, userId } = req.body;
-
     const result = await courseService.enrollCourseService(courseId, userId);
 
     res.status(httpStatus.OK).json({
@@ -115,10 +113,10 @@ const deleteCourse = catchAsync(async (req: Request, res: Response) => {
 const updateCourse = catchAsync(async (req: Request, res: Response) => {
   const result = await courseService.updateCourse(req.params.id, req.body);
   sendResponse(res, {
-      statusCode: httpStatus.OK,
-      status: true,
-      message: 'Course updated successfully',
-      data: result,
+    statusCode: httpStatus.OK,
+    status: true,
+    message: 'Course updated successfully',
+    data: result,
   });
 })
 

@@ -65,7 +65,7 @@ const submitFeedback = async (courseId: string, studentId: string, comment: stri
 };
 
 //student follow course
-export const followCourseService = async (courseId: string, userId: string) => {
+ const followCourseService = async (courseId: string, userId: string) => {
   const course = await Course.findById(courseId);
   if (!course) {
     throw new Error('Course not found');
@@ -85,6 +85,10 @@ export const followCourseService = async (courseId: string, userId: string) => {
   course.followedBy.push(userObjectId);
   await course.save();
 
+  user.followedCourses ??= [];
+  user.followedCourses.push(course._id);
+  await user.save();
+
   return {
     message: 'Course followed successfully',
     followedBy: course.followedBy,
@@ -93,7 +97,7 @@ export const followCourseService = async (courseId: string, userId: string) => {
 };
 
 
-export const enrollCourseService = async (courseId: string, userId: string) => {
+ const enrollCourseService = async (courseId: string, userId: string) => {
   const course = await Course.findById(courseId);
   if (!course) {
     throw new Error('Course not found');
@@ -109,7 +113,7 @@ export const enrollCourseService = async (courseId: string, userId: string) => {
     throw new Error('Already enrolled in this course');
   }
 
-  // Add user to course
+  // Add user to course data
   course.enrolledStudents.push(user._id);
   await course.save();
 

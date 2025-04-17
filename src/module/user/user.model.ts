@@ -58,7 +58,7 @@ const userSchema = new Schema<IUser>({
       ref: 'Course',
     },
   ],
-  followedCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+  followedCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' , default: [],  }],
   createdAt: {
     type: Date,
   },
