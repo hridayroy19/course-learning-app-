@@ -64,7 +64,7 @@ POST    /api/v1/course/enroll/:courseId     Course Enroll Student
 
 
 ## Full Postman collection :
- <!-- ## https://api.postman.com/collections/34266685-492500a1-fb37-4743-977f-a50e27fe9330?access_key=PMAT-01JS1JGN3WP4P52Y8T589M7B3C -->
+
 
 ##  Contact
 Made with ❤️ by Hridoy Chandra Roy
