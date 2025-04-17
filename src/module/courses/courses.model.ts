@@ -41,5 +41,6 @@ const courseSchema = new Schema<ICourse>(
   { timestamps: true }
 );
 
+
 const Course = model<ICourse>('Course', courseSchema);
 export default Course;

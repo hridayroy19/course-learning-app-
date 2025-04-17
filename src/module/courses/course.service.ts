@@ -4,8 +4,19 @@ import { ICourse } from "./course.interface";
 import Course from "./courses.model";
 import User from "../user/user.model";
 
+// coruse crud opartion start
 const createCourse = async (payload: any) => {
   const result = await Course.create(payload);
+  return result;
+};
+
+const getSingleCourse = async (id: string) => {
+  const result = await Course.findById(id);
+  return result;
+};
+
+const deleteCourse = async (id: string) => {
+  const result = await Course.findByIdAndDelete(id);
   return result;
 };
 
@@ -13,6 +24,14 @@ const getAllCourses = async () => {
   const result = await Course.find();
   return result;
 };
+
+
+const updateCourse = async (id: string, payload: any) => {
+  const result = await Course.findByIdAndUpdate(id, payload, { new: true });
+  return result;
+};
+
+// >>> end crud oparation>>
 
 // like comment 
 
@@ -111,5 +130,8 @@ export const courseService = {
   likeCourse,
   submitFeedback,
   followCourseService,
-  enrollCourseService
+  enrollCourseService,
+  getSingleCourse,
+  deleteCourse,
+  updateCourse
 };
