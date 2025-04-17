@@ -20,8 +20,6 @@ const getAllTopics = async () => {
     return result;
 };
 
-
-
 export const topicService = {
     createTopic,
     getAllTopics,

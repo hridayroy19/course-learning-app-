@@ -21,7 +21,11 @@ const deleteCourse = async (id: string) => {
 };
 
 const getAllCourses = async () => {
-  const result = await Course.find();
+  const result = await Course.find().populate('topics')
+    .populate('lessons')
+    .populate('likedBy')
+    .populate('followedBy')
+    .populate('enrolledStudents');
   return result;
 };
 
@@ -65,7 +69,7 @@ const submitFeedback = async (courseId: string, studentId: string, comment: stri
 };
 
 //student follow course
- const followCourseService = async (courseId: string, userId: string) => {
+const followCourseService = async (courseId: string, userId: string) => {
   const course = await Course.findById(courseId);
   if (!course) {
     throw new Error('Course not found');
@@ -97,7 +101,7 @@ const submitFeedback = async (courseId: string, studentId: string, comment: stri
 };
 
 
- const enrollCourseService = async (courseId: string, userId: string) => {
+const enrollCourseService = async (courseId: string, userId: string) => {
   const course = await Course.findById(courseId);
   if (!course) {
     throw new Error('Course not found');
