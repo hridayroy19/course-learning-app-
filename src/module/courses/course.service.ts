@@ -20,14 +20,38 @@ const deleteCourse = async (id: string) => {
   return result;
 };
 
-const getAllCourses = async () => {
-  const result = await Course.find().populate('topics')
+const getAllCourses = async (query: any) => {
+
+  const { page = 1, limit = 10, searchTerm } = query;
+
+  const filters: any = {};
+
+  if (searchTerm) {
+    filters.title = {
+      $regex: searchTerm,
+      $options: 'i',
+    };
+  }
+
+  const skip = (Number(page) - 1) * Number(limit);
+
+  const result = await Course.find(filters).skip(skip).populate('topics')
     .populate('lessons')
     .populate('likedBy')
     .populate('followedBy')
     .populate('enrolledStudents');
-  return result;
+
+  const total = await Course.countDocuments(filters);
+  return {
+    meta: {
+      page: Number(page),
+      limit: Number(limit),
+      total,
+    },
+    data: result,
+  };
 };
+
 
 
 const updateCourse = async (id: string, payload: any) => {

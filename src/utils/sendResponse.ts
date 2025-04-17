@@ -1,10 +1,19 @@
 import { Response } from 'express'
 
+
+type IMeta = {
+  page: number;
+  limit: number;
+  total: number;
+};
+
+
 type TSuccessResponse<T> = {
   status?: boolean
   statusCode: number
   message: string
   token?: string
+  meta?:IMeta
   data: T | T[] | null
 }
 
@@ -15,6 +24,7 @@ const sendResponse = <T>(res: Response, data: TSuccessResponse<T>) => {
     message: data.message,
     token: data.token,
     data: data.data,
+    meta:data.meta
   })
 }
 
