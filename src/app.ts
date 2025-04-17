@@ -16,11 +16,11 @@ app.use(express.json())
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 
 // router here
-app.use('/api/user', userRouter)
-app.use('/api/auth', authRoute)
-app.use('/api/course', courserouter)
-app.use('/api/lesson', lessionrouter)
-app.use('/api/topic', topicRouter)
+app.use('/api/v1/user', userRouter)
+app.use('/api/v1/auth', authRoute)
+app.use('/api/v1/course', courserouter)
+app.use('/api/v1/lesson', lessionrouter)
+app.use('/api/v1/topic', topicRouter)
 
 
 app.get('/', (req: Request, res: Response) => {

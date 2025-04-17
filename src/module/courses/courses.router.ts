@@ -12,7 +12,7 @@ courserouter.get('/:id', courseController.getSingleCourse);
 courserouter.delete('/:id', courseController.deleteCourse);
 courserouter.patch('/:id', auth("teacher"), validateRequest(updateCourseSchema), courseController.updateCourse);
 
-courserouter.post('/like:courseId', courseController.likeCourse);
+courserouter.post('/like/:courseId', courseController.likeCourse);
 courserouter.post('/feedback/:courseId', courseController.submitFeedback);
 courserouter.post('/follow/:courseId', courseController.followCourse);
 courserouter.post('/enroll/:courseId', auth("student"), courseController.enrollCourseController);
