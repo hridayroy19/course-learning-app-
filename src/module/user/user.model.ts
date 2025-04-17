@@ -42,6 +42,7 @@ const userSchema = new Schema<IUser>({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Course',
+      default: [],
     },
   ],
 
@@ -64,15 +65,19 @@ const userSchema = new Schema<IUser>({
 })
 
 userSchema.pre('save', async function (next) {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const user = this
-  // hashing password and save into DB
-  user.password = await bcrypt.hash(
-    user.password,
-    Number(config.bcrypt_salt_rounds)
-  )
-  next()
-})
+  const user = this as IUser;
+
+  if (user.isModified('password') && user.password) {
+    user.password = await bcrypt.hash(
+      user.password,
+      Number(config.bcrypt_salt_rounds)
+    );
+  }
+
+  next();
+});
+
+
 // set '' after saving password
 userSchema.post('save', function (doc, next) {
   doc.password = ''

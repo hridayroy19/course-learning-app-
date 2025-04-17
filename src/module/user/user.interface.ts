@@ -2,6 +2,7 @@ import { Types } from 'mongoose'
 import { USER_ROLE } from './user.constants'
 
 export interface IUser {
+  isModified(arg0: string): unknown
   _id?: Types.ObjectId
   name: string
   email: string

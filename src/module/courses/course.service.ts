@@ -113,9 +113,11 @@ export const enrollCourseService = async (courseId: string, userId: string) => {
   course.enrolledStudents.push(user._id);
   await course.save();
 
-  // user.enrolledCourses = [];
-  // user.enrolledCourses.push(course._id);
-  // await user.save();
+  user.enrolledCourses = [];
+  // console.log(course._id,"after ")
+  user.enrolledCourses.push(course._id);
+  // console.log(course._id,"push ")
+  await user.save();
 
   return {
     courseId: course._id,
