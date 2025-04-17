@@ -25,7 +25,7 @@ const courseSchema = new Schema<ICourse>(
     title: { type: String, required: true, trim: true },
     description: { type: String, required: true },
     teacherId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    lessons: [{ type: Schema.Types.ObjectId, ref: 'Lesson' }],
+    lessons: [{ type: Schema.Types.ObjectId, ref: 'Lesson' , default:[] }],
     topics: [{ type: Schema.Types.ObjectId, ref: 'Topic' }],
     likes: { type: Number, default: 0 },
     likedBy: [{ type: Schema.Types.ObjectId, ref: 'User' }],
