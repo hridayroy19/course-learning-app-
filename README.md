@@ -39,7 +39,7 @@ npm install
 DATABASE_URL=
 PORT=
 Bctypt=
-JWT_SECRET=your_jwt_secret
+JWT_SECRET=
 JWT_EXPIRES_IN=2d
 
 ## Run the Server
